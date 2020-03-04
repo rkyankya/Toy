@@ -1,0 +1,28 @@
+html,
+body {
+    height: 100%;
+}
+
+#page-content {
+    flex: 1 0 auto;
+}
+
+#sticky-footer {
+    flex-shrink: none;
+}
+
+/* Other Classes for Page Styling */
+
+body {
+    background: #d6ae7b;
+    background: linear-gradient(to right, #eacda3, #d6ae7b);
+}
+
+.masthead {
+    height: 100vh;
+    min-height: 500px;
+    background-image: url('https://source.unsplash.com/BtbjCFUvBXs/1920x1080');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
