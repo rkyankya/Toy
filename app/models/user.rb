@@ -15,4 +15,7 @@ class User < ApplicationRecord
   validates :password, presence: true, length: { minimum: 6 }
   extend FriendlyId
   friendly_id :username, use: :slugged
+
+  # include Gravtastic
+  # gravtastic
 end
