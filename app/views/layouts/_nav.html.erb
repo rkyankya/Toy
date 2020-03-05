@@ -16,9 +16,29 @@
         <li class="nav-item">
           <a class="nav-link" href="/contact">Contact</a>
         </li>
-        <li class="nav-item">
-          <a class="nav-link" href="/signup">Sign Up</a>
-        </li>
+
+       <% if logged_in? %>
+          <li>
+            <a class="nav-link" href="/users">Users</a>
+          </li>
+          <li class="nav-item dropdown">
+            <div class="dropdown open">
+              <button class="btn btn-light dropdown-toggle" type="button" id="dropdownMenu5" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            Account
+          </button>
+            <div class="dropdown-menu">
+              <a class="dropdown-item" href="#">Profile</a>
+              <a class="dropdown-item" href="#">Settings</a>
+              <div class="dropdown-divider"></div>
+              <a class="dropdown-item" rel="nofollow" data-method="delete" href="/logout">Log out</a>
+            </div>
+          </div>
+          </li>
+        <% else %>
+          <li> 
+            <a class="nav-link" href="/login">Login</a>
+          </li>
+        <% end %>
       </ul>
     </div>
   </div>

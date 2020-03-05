@@ -32,13 +32,13 @@ gem 'uglifier'
 
 gem 'better_errors'
 gem 'bootstrap'
+gem 'bootstrap-sass'
+gem 'simple_sessions'
 gem 'faker'
 gem 'friendly_id'
 gem 'hirb'
 gem 'pry'
 gem 'simple_form'
-
-gem 'bootstrap-sass'
 # gem 'formtastic-bootstrap'
 
 # Use Active Storage variant

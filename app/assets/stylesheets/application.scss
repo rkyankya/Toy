@@ -12,17 +12,10 @@
  *
  */
 
- @import "bootstrap";
- .users {
-	.col-lg-4 {
-		margin-bottom: 1.5rem;
-		text-align: center;
-		p {
-			margin-right: .75rem;
-			margin-left: .75rem;
-		}
-	}
-	h2 {
-		font-weight: 400;
-	}
-}
+@import "bootstrap";
+// @import "custom.scss";
+// @import "nav.scss";
+// @import "scaffolds.scss";
+// @import "sessions.scss";
+// @import "static_pages.scss";
+// @import "users.scss";
