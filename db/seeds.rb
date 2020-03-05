@@ -8,6 +8,14 @@
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
 
+User.create!(name: 'Example User',
+             email: 'example@railstutorial.org',
+             password: 'foobar',
+             password_confirmation: 'foobar',
+             admin: true)
+
+p 'Admin Created'
+
 10.times do |n|
   name = "foobar#{n + 1}"
   first = Faker::Name.first_name
@@ -22,3 +30,5 @@
                password: password,
                gravatar: gravatar)
 end
+
+p 'Database Filled'
