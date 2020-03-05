@@ -3,17 +3,7 @@
 # User Model
 class User < ApplicationRecord
   attr_accessor :remember_token
-  ############
-  # Paste this two functions after your validations and before private (If you have it)
-  def remember(token)
-    self.remember_token = token
-    update_attribute(:remember_digest, BCrypt::Password.create(remember_token))
-  end
 
-  def authenticated?(remember_token)
-    BCrypt::Password.new(remember_digest).is_password?(remember_token)
-  end
-  ############
   before_save { self.email = email.downcase }
   validates :username, presence: true, length: { maximum: 50 },
                        uniqueness: { case_sensitive: false }
@@ -28,6 +18,29 @@ class User < ApplicationRecord
   extend FriendlyId
   friendly_id :username, use: :slugged
 
-  # include Gravtastic
-  # gravtastic
+  # Returns the hash digest of the given string.
+  def self.digest(string)
+    cost = ActiveModel::SecurePassword.min_cost ? BCrypt::Engine::MIN_COST :
+                                                  BCrypt::Engine.cost
+    BCrypt::Password.create(string, cost: cost)
+  end
+
+  # Returns a random token.
+  def self.new_token
+    SecureRandom.urlsafe_base64
+  end
+
+  def remember(token)
+    self.remember_token = token
+    update_attribute(:remember_digest, BCrypt::Password.create(remember_token))
+  end
+
+  def authenticated?(remember_token)
+    BCrypt::Password.new(remember_digest).is_password?(remember_token)
+  end
+
+  # Forget a user
+  def forget
+    update_attribute(:remember_digest, nil)
+  end
 end

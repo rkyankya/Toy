@@ -16,6 +16,7 @@
         <li class="nav-item">
           <a class="nav-link" href="/contact">Contact</a>
         </li>
+        
 
        <% if logged_in? %>
           <li>
@@ -27,8 +28,8 @@
             Account
           </button>
             <div class="dropdown-menu">
-              <a class="dropdown-item" href="#">Profile</a>
-              <a class="dropdown-item" href="#">Settings</a>
+              <a class="dropdown-item" href="#"><%= link_to "Profile", current_user %></a>
+              <a class="dropdown-item" href="#"><%= link_to "Settings", edit_user_path(current_user) %></a>
               <div class="dropdown-divider"></div>
               <a class="dropdown-item" rel="nofollow" data-method="delete" href="/logout">Log out</a>
             </div>

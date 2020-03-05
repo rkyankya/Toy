@@ -1,7 +1,9 @@
 # frozen_string_literal: true
 
 class UsersController < ApplicationController
-  before_action :set_user, only: %i[show edit update destroy]
+  before_action :logged_in_user, only: %i[index edit update destroy]
+  before_action :correct_user,   only: %i[edit update]
+  before_action :admin_user,     only: :destroy
 
   # GET /users
   # GET /users.json
@@ -21,12 +23,22 @@ class UsersController < ApplicationController
   end
 
   # GET /users/1/edit
-  def edit; end
+  def edit
+    @user = User.friendly.find(params[:id])
+  end
 
   # POST /users
   # POST /users.json
   def create
     @user = User.new(user_params)
+
+    if @user.save
+      log_in @user
+      flash[:success] = 'Welcome to the Sample App!'
+      redirect_to @user
+    else
+      render 'new'
+    end
 
     respond_to do |format|
       if @user.save
@@ -74,4 +86,22 @@ class UsersController < ApplicationController
   def user_params
     params.require(:user).permit(:username, :first_name, :last_name, :email, :password)
   end
+
+  # Confirms a logged-in user.
+  def logged_in_user
+    unless logged_in?
+      flash[:danger] = 'Please log in.'
+      redirect_to login_url
+    end
+  end
+
+  def correct_user
+    @user = User.friendly.find(params[:id])
+    redirect_to(root_url) unless @user == current_user
+  end
+
+  # Confirms an admin user.
+  def admin_user
+    redirect_to(root_url) unless current_user.admin?
+ end
 end
